@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Don't rewrite real files (assets, etc.)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Everything else → front controller
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Don't serve dotfiles
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Cache static assets
+<IfModule mod_headers.c>
+    <FilesMatch "\.(css|js|svg|woff2?)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+</IfModule>

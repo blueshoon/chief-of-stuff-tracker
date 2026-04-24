@@ -1,0 +1,10 @@
+/vendor/
+/node_modules/
+/data/*.sqlite
+/data/*.sqlite-journal
+/data/login_attempts.json
+/.env
+/public/assets/app.css
+.DS_Store
+Thumbs.db
+*.log
