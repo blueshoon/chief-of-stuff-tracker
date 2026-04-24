@@ -14,7 +14,7 @@ Runs on Roy's existing DigitalOcean droplet — that's the deploy target. Mobile
 - **Composer is required for vendor only.** `public/index.php` requires `vendor/autoload.php` for `dompdf/dompdf` (PDF export). Our own code in `src/` is still loaded by manual `require` calls in `public/index.php` — the Composer autoloader does NOT include any of our files (no `psr-4` or `files` entries). If you're tempted to add one, don't — manual requires keep load order explicit and prevent function-redeclaration crashes.
 - **SQLite via PDO**, file lives at `data/chief.sqlite` (gitignored). `db()` in `src/db.php` is a memoized singleton with `foreign_keys=ON`, `journal_mode=WAL`, `busy_timeout=5000`.
 - **Vanilla JS only** in `public/assets/app.js`. No bundler, no React. Animations use **Motion One** loaded from CDN (search `motion@10.18.0` in `src/views/layout.php`).
-- **Tailwind via npm** for the build only. `npm run build` (or `./build.sh`) compiles `tailwind/input.css` → `public/assets/app.css`. The output is **gitignored** — always rebuild after pulling.
+- **Tailwind via npm** for the build only. `npm run build` (or `./build.sh`) compiles `tailwind/input.css` → `public/assets/app.css`. The output **IS committed** (Forge's old npm chokes on the build, so we ship the artifact). Rebuild + commit `public/assets/app.css` whenever you change markup classes or `tailwind/input.css`.
 - **Money is integer cents** everywhere in the DB and PHP. Use `dollars($cents)` to render and `parse_dollars_to_cents($str)` to parse. Time is integer **minutes**; use `format_minutes_as_hours($mins)` and `parse_hours_to_minutes($str)` (handles both `2.5` and `2:30`).
 
 ## Local dev
@@ -109,14 +109,12 @@ Manual deploy via `git pull` on the droplet:
 ```bash
 git pull
 composer install --no-dev --optimize-autoloader
-npm install --production=false   # need devDeps for tailwindcss
-npm run build
 php scripts/migrate.php
 # nginx/apache vhost should point at public/, with .htaccess (Apache) or
 # a try_files rewrite (nginx) sending all unknown paths to /index.php
 ```
 
-`vendor/` is gitignored — `composer install` is **required** on every deploy now (dompdf isn't optional anymore).
+`vendor/` is gitignored — `composer install` is **required** on every deploy now (dompdf isn't optional anymore). Node is **not** installed on the deploy host; `public/assets/app.css` is built locally and committed.
 
 The DB is one file (`data/chief.sqlite`). **Cron a nightly backup** — `cp data/chief.sqlite /var/backups/chief-$(date +%F).sqlite` is enough.
 
@@ -128,7 +126,7 @@ The DB is one file (`data/chief.sqlite`). **Cron a nightly backup** — `cp data
 - **`max(int, ...$emptyArray)` blows up under PHP 8** — guard for empty before spreading. Use `$arr ? max(1, max($arr)) : 1` or `max(array_merge([1], $arr))`.
 - **Invoiced source rows are read-only by design.** A `time_entries` or `billable_expenses` row with non-NULL `invoice_id` is rejected by the delete handler — fix that by deleting the invoice first (which un-invoices the rows). Don't loosen this without thinking through accounting consequences.
 - **Invoice PDFs use `src/views/invoice_print.php`, NOT the layout chain.** It's a self-contained HTML doc with inline CSS for dompdf. Tailwind classes won't render in the PDF.
-- **`public/assets/app.css` is built, not source.** Editing it directly will be wiped on next build. Edit `tailwind/input.css` (for `@layer` definitions) or the markup classes themselves.
+- **`public/assets/app.css` is built, not source — but it IS committed.** Editing it directly will be wiped on next build. Edit `tailwind/input.css` (for `@layer` definitions) or the markup classes themselves, then `npm run build` and commit the regenerated file. Forge's deploy can't run npm reliably, so the artifact ships in git.
 - **Tailwind `content` paths only scan `public/**/*.php` and `src/**/*.php`.** New view directories outside those globs will produce stripped CSS. Update `tailwind/tailwind.config.js` if you reorganize.
 - **Login throttling state lives in `data/login_attempts.json`** (per-IP, 5 failures / 5 min window). It's gitignored. To unlock yourself during development, just delete the file.
 - **`active_timer` table has a `CHECK (id = 1)` constraint.** Trying to insert a second timer row will fail at the SQL level — the `h_timer_start` handler guards against this with an `active_timer()` check first, but if you write a new path, respect the invariant.
