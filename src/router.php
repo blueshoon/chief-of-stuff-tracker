@@ -41,7 +41,7 @@ function route_match(string $pattern, string $uri): ?array {
     return null;
 }
 
-function redirect(string $path): never {
+function redirect(string $path) {
     header('Location: ' . $path);
     exit;
 }
