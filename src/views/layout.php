@@ -23,9 +23,10 @@ $current   = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
     <div id="app" class="mx-auto max-w-2xl px-4 pt-6 sm:pt-10">
         <?php if ($user): ?>
             <header class="flex items-center justify-between mb-6">
-                <a href="/dashboard" class="flex items-center gap-2.5 group">
-                    <span class="inline-grid place-items-center w-9 h-9 rounded-xl bg-rust-500 text-cream font-display font-bold text-lg shadow-card group-hover:scale-105 transition-transform">C</span>
-                    <span class="font-display text-xl tracking-tight">Chief of Stuff</span>
+                <a href="/dashboard" class="group">
+                    <img src="/assets/images/chief-of-stuff-horizontal-white-text.svg"
+                         alt="Chief of Stuff"
+                         class="h-10 w-auto group-hover:scale-105 transition-transform">
                 </a>
                 <form method="post" action="/logout">
                     <?= csrf_field() ?>

@@ -1,0 +1,9 @@
+<svg aria-labelledby="title desc" role="img" viewBox="94.8 87.6 409.20000000000005 327.6" xmlns="http://www.w3.org/2000/svg" style="max-height: 500px" width="409.20000000000005" height="327.6">
+  <title>Chief of Stuff checkmark icon</title>
+  <desc id="desc">Minimal black checkmark inside an open circle.</desc>
+  <rect fill="#ffffff" height="600" width="600"/>
+  <g stroke-linejoin="round" stroke-linecap="round" stroke="#111111" fill="none">
+    <path stroke-width="6" d="M361 153 A147 147 0 1 0 395 220"/>
+    <path stroke-width="27" d="M258 269 L318 329 L482 150"/>
+  </g>
+</svg>

@@ -3,9 +3,10 @@ $next = $_GET['next'] ?? '/dashboard';
 ?>
 <div class="min-h-[80vh] flex flex-col justify-center">
     <div class="text-center mb-8">
-        <div class="inline-grid place-items-center w-16 h-16 rounded-2xl bg-rust-500 text-cream font-display font-bold text-3xl shadow-card mb-4">C</div>
-        <h1 class="font-display text-3xl tracking-tight">Chief of Stuff</h1>
-        <p class="text-cream/70 text-sm mt-1">Welcome back, Mari.</p>
+        <img src="/assets/images/chief-of-stuff-horizontal-white-text.svg"
+             alt="Chief of Stuff"
+             class="h-32 w-auto mx-auto mb-3">
+        <p class="text-cream/70 text-sm">Welcome back, Mari.</p>
     </div>
 
     <form method="post" action="/login" class="space-y-4">

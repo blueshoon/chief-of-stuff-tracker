@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Chief of Stuff full logo</title>
+  <desc id="desc">Minimal black and white logo with a checkmark inside an open circle, Chief of Stuff wordmark, subtitle, and New York location.</desc>
+  <rect width="1200" height="1200" fill="#ffffff"/>
+  <g fill="none" stroke="#111111" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Open circle -->
+    <path d="M738 347 A184 184 0 1 0 780 431" stroke-width="7"/>
+    <!-- Checkmark -->
+    <path d="M548 474 L628 554 L858 316" stroke-width="34"/>
+  </g>
+
+  <!-- Main wordmark -->
+  <text x="600" y="765" text-anchor="middle" fill="#111111"
+        font-family="Montserrat, Avenir Next, Helvetica Neue, Arial, sans-serif"
+        font-size="61" font-weight="400" letter-spacing="24">CHIEF OF STUFF</text>
+
+  <!-- Divider -->
+  <line x1="545" y1="817" x2="655" y2="817" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Subtitle -->
+  <text x="600" y="877" text-anchor="middle" fill="#111111"
+        font-family="Montserrat, Avenir Next, Helvetica Neue, Arial, sans-serif"
+        font-size="29" font-weight="400" letter-spacing="12">PERSONAL ASSISTANT FOR HIRE</text>
+
+  <!-- Location -->
+  <text x="600" y="930" text-anchor="middle" fill="#111111"
+        font-family="Georgia, Times New Roman, serif"
+        font-size="29" font-weight="400" letter-spacing="13">NEW YORK</text>
+</svg>

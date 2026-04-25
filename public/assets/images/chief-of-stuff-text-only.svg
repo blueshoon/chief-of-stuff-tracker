@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">Chief of Stuff text only logo</title>
+  <desc id="desc">Minimal Chief of Stuff wordmark with subtitle and New York location.</desc>
+  <rect width="1200" height="500" fill="#ffffff"/>
+  <text x="600" y="185" text-anchor="middle" fill="#111111"
+        font-family="Montserrat, Avenir Next, Helvetica Neue, Arial, sans-serif"
+        font-size="61" font-weight="400" letter-spacing="24">CHIEF OF STUFF</text>
+  <line x1="545" y1="240" x2="655" y2="240" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+  <text x="600" y="300" text-anchor="middle" fill="#111111"
+        font-family="Montserrat, Avenir Next, Helvetica Neue, Arial, sans-serif"
+        font-size="29" font-weight="400" letter-spacing="12">PERSONAL ASSISTANT FOR HIRE</text>
+  <text x="600" y="353" text-anchor="middle" fill="#111111"
+        font-family="Georgia, Times New Roman, serif"
+        font-size="29" font-weight="400" letter-spacing="13">NEW YORK</text>
+</svg>

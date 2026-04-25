@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1800" height="420" viewBox="0 0 1800 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Chief of Stuff horizontal logo</title>
+  <desc id="desc">Minimal checkmark icon to the left of the Chief of Stuff wordmark.</desc>
+  <rect width="100%" height="100%" fill="none"/>
+  <g transform="translate(130 92)" color="black">
+    <!-- Open circle -->
+    <path d="M190 45
+             C150 9, 88 14, 52 55
+             C10 103, 16 176, 66 218
+             C113 257, 184 251, 224 204
+             C248 176, 255 140, 244 108"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="9"
+          stroke-linecap="round"/>
+    <!-- Checkmark -->
+    <path d="M65 132 L112 180 L260 30"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="28"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </g>
+
+  <text x="500" y="232"
+        font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-size="96"
+        font-weight="300"
+        letter-spacing="34"
+        fill="black">
+    CHIEF OF STUFF
+  </text>
+</svg>

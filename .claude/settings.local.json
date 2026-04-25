@@ -6,7 +6,10 @@
       "Bash(npx tailwindcss *)",
       "Bash(/c/ProgramData/ComposerSetup/bin/composer require *)",
       "Bash(/c/ProgramData/ComposerSetup/bin/composer dump-autoload *)",
-      "Bash(pkill -f \"php.exe.*8765\" rm -f /tmp/cos_jar*.txt /tmp/login_get.html /tmp/inv2.pdf echo \"cleaned up\" echo \"\" echo \"--- final repo state ---\" git status --short)"
+      "Bash(pkill -f \"php.exe.*8765\" rm -f /tmp/cos_jar*.txt /tmp/login_get.html /tmp/inv2.pdf echo \"cleaned up\" echo \"\" echo \"--- final repo state ---\" git status --short)",
+      "Bash(npm run *)",
+      "Bash(npm install *)",
+      "Bash(/c/ProgramData/ComposerSetup/bin/composer install *)"
     ]
   }
 }
