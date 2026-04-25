@@ -1,6 +1,13 @@
 (() => {
   'use strict';
 
+  // --- Service worker registration ----------------------------------------
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+
   const motion = (window.Motion && window.Motion.animate) ? window.Motion : null;
   const animate = motion ? motion.animate : null;
 

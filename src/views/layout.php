@@ -20,6 +20,11 @@ $navTabs = [
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#000042">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Chief of Stuff">
+    <link rel="apple-touch-icon" href="/icon.svg">
     <title><?= e($pageTitle) ?> · Chief of Stuff</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -131,6 +136,6 @@ $navTabs = [
     <div id="toast-region" class="fixed bottom-24 inset-x-0 flex flex-col items-center gap-2 px-4 pointer-events-none z-40"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/motion@10.18.0/dist/motion.min.js"></script>
-    <script src="/assets/app.js?v=2" defer></script>
+    <script src="/assets/app.js?v=3" defer></script>
 </body>
 </html>

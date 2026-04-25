@@ -1,0 +1,19 @@
+{
+  "name": "Chief of Stuff",
+  "short_name": "Chief of Stuff",
+  "description": "Time and expense tracker",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000042",
+  "theme_color": "#000042",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
