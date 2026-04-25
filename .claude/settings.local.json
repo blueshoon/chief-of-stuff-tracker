@@ -9,7 +9,8 @@
       "Bash(pkill -f \"php.exe.*8765\" rm -f /tmp/cos_jar*.txt /tmp/login_get.html /tmp/inv2.pdf echo \"cleaned up\" echo \"\" echo \"--- final repo state ---\" git status --short)",
       "Bash(npm run *)",
       "Bash(npm install *)",
-      "Bash(/c/ProgramData/ComposerSetup/bin/composer install *)"
+      "Bash(/c/ProgramData/ComposerSetup/bin/composer install *)",
+      "Bash(grep -o '\\\\.w-56\\\\b\\\\|\\\\.top-full\\\\b\\\\|\\\\.bg-navy-500\\\\\\\\/60\\\\|\\\\.z-40\\\\b' /c/laragon/www/chief-of-stuff-tracker/public/assets/app.css)"
     ]
   }
 }

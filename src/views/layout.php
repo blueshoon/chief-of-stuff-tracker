@@ -5,6 +5,14 @@ $timer     = $user ? active_timer() : null;
 $flashes   = flash_all();
 $pageTitle = $pageTitle ?? 'Chief of Stuff';
 $current   = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+
+$navTabs = [
+    ['/time',      'Time',      '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'],
+    ['/expenses',  'Expenses',  '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M3 12h18M3 17h12"/></svg>'],
+    ['/clients',   'Clients',   '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'],
+    ['/invoices',  'Invoices',  '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>'],
+    ['/dashboard', 'Dashboard', '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/></svg>'],
+];
 ?>
 <!doctype html>
 <html lang="en">
@@ -28,10 +36,45 @@ $current   = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
                          alt="Chief of Stuff"
                          class="h-10 w-auto group-hover:scale-105 transition-transform">
                 </a>
-                <form method="post" action="/logout">
-                    <?= csrf_field() ?>
-                    <button class="btn-ghost text-sm px-3 py-2" type="submit">Sign out</button>
-                </form>
+                <div class="relative" data-menu>
+                    <button type="button"
+                            class="btn-ghost px-3 py-2 inline-flex items-center justify-center"
+                            aria-label="Menu"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            data-menu-toggle>
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 6h18M3 12h18M3 18h18"/>
+                        </svg>
+                    </button>
+                    <div class="hidden absolute right-0 top-full mt-2 w-56 rounded-2xl bg-navy-600/95 backdrop-blur border border-navy-400/30 shadow-card overflow-hidden z-40"
+                         data-menu-panel
+                         role="menu">
+                        <?php foreach ($navTabs as [$href, $label, $icon]):
+                            $active = str_starts_with($current, $href);
+                        ?>
+                            <a href="<?= e($href) ?>"
+                               role="menuitem"
+                               class="flex items-center gap-3 px-4 py-3 transition-colors <?= $active ? 'text-rust-300 bg-navy-500/60' : 'text-cream hover:bg-navy-500/60' ?>">
+                                <?= $icon ?>
+                                <span class="text-sm font-semibold"><?= e($label) ?></span>
+                            </a>
+                        <?php endforeach; ?>
+                        <form method="post" action="/logout" class="border-t border-navy-400/30">
+                            <?= csrf_field() ?>
+                            <button type="submit"
+                                    role="menuitem"
+                                    class="w-full flex items-center gap-3 px-4 py-3 text-cream/80 hover:text-cream hover:bg-navy-500/60 transition-colors">
+                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                                    <path d="M16 17l5-5-5-5"/>
+                                    <path d="M21 12H9"/>
+                                </svg>
+                                <span class="text-sm font-semibold">Sign out</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </header>
 
             <?php if ($timer): ?>
@@ -72,15 +115,7 @@ $current   = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
     <?php if ($user): ?>
         <nav class="fixed bottom-0 inset-x-0 z-30 bg-navy-600/90 backdrop-blur border-t border-navy-400/30">
             <div class="mx-auto max-w-2xl grid grid-cols-5 px-1 pb-[env(safe-area-inset-bottom)]">
-                <?php
-                $tabs = [
-                    ['/time',      'Time',      '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'],
-                    ['/expenses',  'Expenses',  '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M3 12h18M3 17h12"/></svg>'],
-                    ['/clients',   'Clients',   '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'],
-                    ['/invoices',  'Invoices',  '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>'],
-                    ['/dashboard', 'Dashboard', '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/></svg>'],
-                ];
-                foreach ($tabs as [$href, $label, $icon]):
+                <?php foreach ($navTabs as [$href, $label, $icon]):
                     $active = str_starts_with($current, $href);
                 ?>
                     <a href="<?= e($href) ?>"
@@ -96,6 +131,6 @@ $current   = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
     <div id="toast-region" class="fixed bottom-24 inset-x-0 flex flex-col items-center gap-2 px-4 pointer-events-none z-40"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/motion@10.18.0/dist/motion.min.js"></script>
-    <script src="/assets/app.js?v=1" defer></script>
+    <script src="/assets/app.js?v=2" defer></script>
 </body>
 </html>

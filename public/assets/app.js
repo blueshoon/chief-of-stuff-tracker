@@ -133,4 +133,29 @@
     });
     if (input) sync(input.value);
   });
+
+  // --- Hamburger menu (data-menu) -----------------------------------------
+  document.querySelectorAll('[data-menu]').forEach((root) => {
+    const toggle = root.querySelector('[data-menu-toggle]');
+    const panel = root.querySelector('[data-menu-panel]');
+    if (!toggle || !panel) return;
+
+    const setOpen = (open) => {
+      panel.classList.toggle('hidden', !open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setOpen(panel.classList.contains('hidden'));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!root.contains(e.target)) setOpen(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  });
 })();
